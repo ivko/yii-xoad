@@ -8,6 +8,6 @@
     ],
     "minimum-stability": "dev",
     "require": {
-
+        "crisu83/yii-extension": ">=1.2.0"
     }
 }
