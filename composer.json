@@ -1,0 +1,13 @@
+{
+    "name": "ivko/yii-xoad",
+    "description": "XOAD integration",
+    "authors": [
+        {
+            "name": "IvKo",
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    }
+}
