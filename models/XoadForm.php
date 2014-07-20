@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('vendor.evool.yii-xoad.models.XoadModel');
+Yii::import('vendor.ivko.yii-xoad.models.XoadModel');
 
 class XoadForm extends XoadModel {
 
