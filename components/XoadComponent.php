@@ -54,7 +54,7 @@ class XoadComponent extends CApplicationComponent
 
         $script = "xoad.env.set('" . $var_name . "', " . XOAD_Client::register($instance, $path) . ");";
 
-        Yii::app()->clientScript->registerScript( $var_name, $script );
+        Yii::app()->clientScript->registerScript( $var_name, $script, CclientScript::POS_HEAD );
     }
     
     public function allowClasses($aliases = array()) {
