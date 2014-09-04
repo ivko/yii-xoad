@@ -1,3 +1,4 @@
+<? extract(array('id' => 'modalDialog'), EXTR_SKIP);?>
 <!-- Modal -->
 <style>
     .progress-bar.animate {
@@ -13,14 +14,14 @@
         background-color: transparent;
     }
     .modal .form-wrapper form {
-        padding: 20px 0 0 0;
+        /*padding: 20px 0 0 0;*/
         margin: 0;
     }
     .modal-body .alert {
         display: none;
     }
 </style>
-<div class="modal hide fade" id="modalDialog">
+<div class="modal hide fade" id="<?=$id?>">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3 class="modal-title"></h3>

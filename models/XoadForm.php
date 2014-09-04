@@ -4,6 +4,12 @@ Yii::import('vendor.ivko.yii-xoad.models.XoadModel');
 
 class XoadForm extends XoadModel {
 
+    public function __construct() {
+        if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
+            Yii::app()->getController()->renderPartial('vendor.ivko.yii-xoad.views.dialog_bs2');
+        }
+    }
+
     public function load($name, $id, $defaultData) {
 
         $model = $this->_getModel($name, $id, $defaultData);
@@ -17,8 +23,9 @@ class XoadForm extends XoadModel {
         
         $model = $this->_loadModel($name, $formData);
         
-        if ($model->validate() && $model->save()) {
-            return $this->_responce(true, array('action' => 'submit', 'model' => $model->attributes));
+        if ($model->validate() && $model->save() && $model->refresh()) {
+            $data = method_exists($model, 'toArray') ? $model->toArray(false) : $model->getAttributes();
+            return $this->_responce(true, array('action' => 'submit', 'model' => $data));
         }
         
         $this->_renderForm($name, $model);
@@ -30,10 +37,13 @@ class XoadForm extends XoadModel {
 
         $model = $this->_getModel($name, $id);
 
-        if ($model->delete()) {
-            return $this->_responce(true, array('action' => 'remove', 'id' => $id));
+        if (!$model) {
+            return $this->_responce(false);
         }
-        return $this->_responce(false);
+
+        $model->delete();
+
+        return $this->_responce(true, array('action' => 'remove', 'id' => $id));
     }
 
     private function _renderForm($name, $model) {
