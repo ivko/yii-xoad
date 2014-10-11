@@ -19,11 +19,11 @@ class XoadForm extends XoadModel {
         return $this->_responce(true, array('action' => 'render'));
     }
     
-    public function submit($name, $formData) {
+    public function submit($name, $formData, $autoClose = true) {
         
         $model = $this->_loadModel($name, $formData);
         
-        if ($model->validate() && $model->save() && $model->refresh()) {
+        if ($model->validate() && $model->save() && $model->refresh() && $autoClose) {
             $data = method_exists($model, 'toArray') ? $model->toArray(false) : $model->getAttributes();
             return $this->_responce(true, array('action' => 'submit', 'model' => $data));
         }
