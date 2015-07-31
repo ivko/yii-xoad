@@ -72,7 +72,7 @@ class XoadComponent extends CApplicationComponent
         if (XOAD_Server::runServer()) {
             foreach (Yii::app()->log->routes as $route) {
                 if ($route instanceof CWebLogRoute || $route instanceof YiiDebugToolbarRoute) {
-                    //$route->enabled = false;
+                    $route->enabled = false;
                 }
             }
             return true;

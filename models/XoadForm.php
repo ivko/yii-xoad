@@ -6,7 +6,7 @@ class XoadForm extends XoadModel {
 
     public function __construct() {
         if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
-            Yii::app()->getController()->renderPartial('vendor.ivko.yii-xoad.views.dialog_bs2');
+            Yii::app()->getController()->renderPartial('vendor.ivko.yii-xoad.views.dialog_bs3');
         }
     }
 
