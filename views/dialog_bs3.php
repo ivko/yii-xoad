@@ -1,6 +1,6 @@
 <? extract(array('id' => 'modalDialog'), EXTR_SKIP);?>
 <div class="modal fade in" id="<?=$id?>">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
