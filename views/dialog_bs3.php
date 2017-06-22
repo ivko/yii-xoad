@@ -1,5 +1,5 @@
-<? extract(array('id' => 'modalDialog'), EXTR_SKIP);?>
-<div class="modal fade in" id="<?=$id?>">
+<?php extract(array('id' => 'modalDialog'), EXTR_SKIP);?>
+<div class="modal fade in" id="<?php echo $id;?>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
