@@ -8,6 +8,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "crisu83/yii-extension": ">=1.2.0"
+        "crisu83/yii-extension": ">=1.2.0",
+        "ivko/xoad": "^0.6"
     }
 }

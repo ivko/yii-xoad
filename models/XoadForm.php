@@ -3,10 +3,11 @@
 Yii::import('vendor.ivko.yii-xoad.models.XoadModel');
 
 class XoadForm extends XoadModel {
-
+    private static $_viewsRendered = false;
     public function __construct() {
-        if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
+        if (!Yii::app()->getRequest()->getIsAjaxRequest() && !static::$_viewsRendered) {
             Yii::app()->getController()->renderPartial('vendor.ivko.yii-xoad.views.dialog_bs3');
+            static::$_viewsRendered = true;
         }
     }
 

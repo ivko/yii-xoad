@@ -1,18 +1,19 @@
 <?php
 Yii::import('vendor.crisu83.yii-extension.behaviors.*');
 //define('XOAD_AUTOHANDLE', false);
-require_once __DIR__ . '/../XOAD-0.6/xoad.php';
+//require_once __DIR__ . '/../XOAD-0.6/xoad.php';
 
 class XoadComponent extends CApplicationComponent
 {
     private $scriptsLoaded = false;
     
     public $forms = array();
+    public $xoad_base = 'vendor.ivko.xoad';
     
     public function init() 
     {
         parent::init();
-        
+        Yii::import($this->xoad_base . '.xoad', true);
         $this->attachBehavior('ext', new ComponentBehavior);
     }
     
