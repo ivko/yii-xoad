@@ -17,7 +17,7 @@ class XoadForm extends XoadModel {
 
         $this->_renderForm($name, $model);
 
-        return $this->_responce(true, array('action' => 'render'));
+        return $this->_response(true, array('action' => 'render'));
     }
     
     public function submit($name, $formData, $autoClose = true) {
@@ -26,12 +26,12 @@ class XoadForm extends XoadModel {
         
         if ($model->validate() && $model->save() && $model->refresh() && $autoClose) {
             $data = method_exists($model, 'toArray') ? $model->toArray(false) : $model->getAttributes();
-            return $this->_responce(true, array('action' => 'submit', 'model' => $data));
+            return $this->_response(true, array('action' => 'submit', 'model' => $data));
         }
         
         $this->_renderForm($name, $model);
         
-        return $this->_responce(true, array('action' => 'render'));
+        return $this->_response(true, array('action' => 'render'));
     }
     
     public function remove($name, $id) {
@@ -39,12 +39,12 @@ class XoadForm extends XoadModel {
         $model = $this->_getModel($name, $id);
 
         if (!$model) {
-            return $this->_responce(false);
+            return $this->_response(false);
         }
 
         $model->delete();
 
-        return $this->_responce(true, array('action' => 'remove', 'id' => $id));
+        return $this->_response(true, array('action' => 'remove', 'id' => $id));
     }
 
     private function _renderForm($name, $model) {
@@ -91,7 +91,7 @@ class XoadForm extends XoadModel {
         return $model;
     }
     
-    private function _responce($success = true, $data = null, $message = null) {
+    private function _response($success = true, $data = null, $message = null) {
         return array('data' => $data, 'success' => $success, 'message' => $message);
     }
 }
