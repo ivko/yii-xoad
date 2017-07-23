@@ -5,7 +5,8 @@
     "description": "XOAD integration",
     "authors": [
         {
-            "name": "IvKo"
+            "name": "Ivko",
+            "email": "evoolster@gmail.com"
         }
     ],
     "minimum-stability": "dev",
