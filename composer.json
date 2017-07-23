@@ -1,6 +1,7 @@
 {
     "name": "ivko/yii-xoad",
     "version": "1.0.0",
+    "license": "MIT",
     "description": "XOAD integration",
     "authors": [
         {
