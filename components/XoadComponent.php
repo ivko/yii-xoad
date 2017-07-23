@@ -6,12 +6,12 @@ class XoadComponent extends CApplicationComponent
     private $scriptsLoaded = false;
     
     public $forms = array();
+    public $services = array();
     public $xoad_base = 'vendor.ivko.xoad';
     
     public function init() 
     {
         parent::init();
-        
         Yii::import($this->xoad_base . '.xoad', true);
         $this->attachBehavior('ext', new ComponentBehavior);
     }
@@ -55,6 +55,17 @@ class XoadComponent extends CApplicationComponent
         $script = "xoad.env.set('" . $var_name . "', " . XOAD_Client::register($instance, $path) . ");";
 
         Yii::app()->clientScript->registerScript( $var_name, $script, CclientScript::POS_HEAD );
+    }
+
+    public function initService($name, $params) {
+        if (!isset($this->services[$name])) {
+            throw new CHttpException(404, "Service '$name' not found!");
+        }
+        $serviceClass = Yii::import($this->services[$name], true);
+        $service = new $serviceClass($name);
+        $service->init();
+        $service->actionParams = $params;
+        return $service;
     }
     
     public function allowClasses($aliases = array()) {
