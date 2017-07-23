@@ -6,7 +6,6 @@ class XoadComponent extends CApplicationComponent
     private $scriptsLoaded = false;
     
     public $forms = array();
-    
     public $xoad_base = 'vendor.ivko.xoad';
     
     public function init() 
