@@ -89,32 +89,7 @@ class XoadService extends XoadModel {
         print XOAD_Client::register(["returnValue" => $errorObject, "returnObject" => $requestBody['source']]);
 	}
 
-    public function authenticate($obj, $params) {
-        return $this->_createResponseObject($this->xoadInitService($obj, compact('params'))->run('authenticate'));
-    }
-
-    public function validate($obj, $data) {
-        return $this->_createResponseObject($this->xoadInitService($obj, compact('data'))->run('validate'));
-    }
-
-    public function create($obj, $data) {
-        return $this->_createResponseObject($this->xoadInitService($obj, compact('data'))->run('create'));
-    }
-    
-    public function update($obj, $pk, $data) {
-        return $this->_createResponseObject($this->xoadInitService($obj, compact('pk', 'data'))->run('update'));
-    }
-
-    public function remove($obj, $pk) {
-        return $this->_createResponseObject($this->xoadInitService($obj, compact('pk'))->run('remove'));
-    }
-
-    public function fetch($obj, $pk) {
-        $responseObject = $this->xoadInitService($obj, compact('pk'))->run('fetch');
-        return $this->_createResponseObject($responseObject);
-    }
-
-    public function filter($obj, $filter=array(), $page = 1) {
-        return $this->_createResponseObject($this->xoadInitService($obj, compact('filter','page'))->run('filter'));
+    public function invoke($obj, $method, $params) {
+        return $this->_createResponseObject($this->xoadInitService($obj, $params)->run($method));
     }
 }

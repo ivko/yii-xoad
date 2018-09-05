@@ -57,12 +57,37 @@ class XoadComponent extends CApplicationComponent
         Yii::app()->clientScript->registerScript( $var_name, $script, CclientScript::POS_HEAD );
     }
 
+    public function registerServices() {
+        $registry = [];
+        foreach($this->services as $name => $class) {
+            $serviceClass = Yii::import($this->services[$name], true);
+            $reflector = new ReflectionClass($serviceClass);
+            $rMethods = $reflector->getMethods(ReflectionMethod::IS_PUBLIC);
+            $registry[$name] = [];
+            foreach($rMethods as $rMethod) {
+                if ($serviceClass === $rMethod->class && strpos($rMethod->name, 'action') === 0) {
+                    $method = lcfirst(str_replace('action', '', $rMethod->name));
+                    //$registry[$name][] = $method;
+                    $params = $reflector->getMethod($rMethod->name)->getParameters();
+                    $registry[$name][$method] = [];
+                    foreach ($params as $param) {
+                        $registry[$name][$method][] = ['name' => $param->getName(), 'optional' => $param->isOptional()];
+                    }
+                }
+            }
+        }
+        $this->registerScripts();
+        $script = "xoad.env.set('XoadServiceRegistry', " . json_encode($registry) . ");";
+        Yii::app()->clientScript->registerScript( 'XoadServiceRegistry', $script, CclientScript::POS_HEAD );
+        $this->registerClass(new XoadService, 'XoadService');
+    }
+
     public function initService($name, $params) {
         if (!isset($this->services[$name])) {
             throw new CHttpException(404, "Service '$name' not found!");
         }
         $serviceClass = Yii::import($this->services[$name], true);
-        $service = new $serviceClass($name);
+        $service = new $serviceClass($serviceClass);
         $service->init();
         $service->actionParams = $params;
         return $service;
