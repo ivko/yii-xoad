@@ -79,7 +79,6 @@ class XoadComponent extends CApplicationComponent
         $this->registerScripts();
         $script = "xoad.env.set('XoadServiceRegistry', " . json_encode($registry) . ");";
         Yii::app()->clientScript->registerScript( 'XoadServiceRegistry', $script, CclientScript::POS_HEAD );
-        $this->registerClass(new XoadService, 'XoadService');
     }
 
     public function initService($name, $params) {
